@@ -1,0 +1,17 @@
+* -----------------------------------------------------------------------------
+* 4069 Single Gate
+* Brian McLaughlin - bjmclaughlin@gmail.com
+* -----------------------------------------------------------------------------
+.SUBCKT 4069Gate IN OUT VDD VSS
+
+.MODEL CD4069BN NMOS (LEVEL=1 VTO=2.1 KP=2.9M GAMMA=3.97U
++ PHI=.75 LAMBDA=1.87M RD=20.2 RS=184.1 IS=31.2F PB=.8 MJ=.46
++ CBD=47.6P CBS=57.2P CGSO=70.2N CGDO=58.5N CGBO=96.3N)
+.MODEL CD4069BP PMOS (LEVEL=1 VTO=-2.9 KP=2M GAMMA=3.97U
++ PHI=.75 LAMBDA=1.87M RD=28.2 RS=145.2 IS=31.2F PB=.8 MJ=.46
++ CBD=47.6P CBS=57.2P CGSO=70.2N CGDO=58.5N CGBO=96.3N)
+
+M2 OUT IN VSS VSS CD4069BN
+M3 OUT IN VDD VDD CD4069BP
+
+.ENDS 4069Gate
