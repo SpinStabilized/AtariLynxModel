@@ -1,0 +1,51 @@
+* -----------------------------------------------------------------------------
+* FDD3690 at Temp. Electrical Model
+* Original by Fairchild Semiconductor (Retrieved 4/5/2016)
+* Modified by: Brian McLaughlin - bjmclaughlin@gmail.com
+*
+* Removed thermal models for compatibility with EasyEDA
+*
+* Reference: https://www.fairchildsemi.com/products/discretes/fets/mosfets/FDD3690.html
+*
+* Sub-circuit Connections
+* DRAIN GATE SOURCE
+* -----------------------------------------------------------------------------
+.SUBCKT FDD3690 DRAIN GATE SOURCE
+
+.MODEL DMOS  NMOS(VTO=3 KP=7.56E+1 THETA=.066667 VMAX=1E5 LEVEL=3)
+.MODEL DDS   D(M=4.54E-1 VJ=3.08E-1 CJO=347p)
+.MODEL DBODY D(IS=9.55E-13 N=1.02441 RS=.000304 TT=38.06n)
+.MODEL INTER NMOS(VTO=0 KP=10 LEVEL=1)
+.MODEL DGD   D(M=3E-1 VJ=1.9E-2 CJO=955p)
+Rg     GATE  11x 1
+Rdu    12x 1   1u
+M1     2   1   4x   4x   DMOS   L=1u   W=1u
+Cgs    1   5x  1512p
+Rd     DRAIN  4   2E-2
+Dds    5x  4   DDS
+Dbody  5x  DRAIN  DBODY
+Ra     4   2   2E-2
+Rs     5x  5   0.5m
+Ls     5   SOURCE  0.5n
+M2     1   8   6   6   INTER
+E2     8   6   4   1   2
+Cgdmax 7   4   955p
+Rcgd   7   4   10meg
+Dgd    6   4   DGD
+Rdgd   6   4   10meg
+M3     7   9   1   1   INTER
+E3     9   1   4   1   -2
+
+* -----------------------------------------------------------------------------
+* ZX SECTION
+* -----------------------------------------------------------------------------
+EOUT   4x  6x  poly(2) (1x,0) (3x,0) 0 0 0 0 1
+FCOPY  0   3x  VSENSE 1
+RIN    1x  0   1G
+VSENSE 6x  5x  0
+RREF   3x  0   10m
+
+.ENDS FDD3690
+* -----------------------------------------------------------------------------
+* FDD3690
+* -----------------------------------------------------------------------------
