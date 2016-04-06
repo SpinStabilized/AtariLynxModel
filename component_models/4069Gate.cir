@@ -2,16 +2,34 @@
 * 4069 Single Gate
 * Brian McLaughlin - bjmclaughlin@gmail.com
 * -----------------------------------------------------------------------------
+* Connections:   Input
+*                |  Output
+*                |  |   Vdd
+*                |  |   |   Vss
+*                |  |   |   |
 .SUBCKT 4069Gate IN OUT VDD VSS
 
-.MODEL CD4069BN NMOS (LEVEL=1 VTO=2.1 KP=2.9M GAMMA=3.97U
-+ PHI=.75 LAMBDA=1.87M RD=20.2 RS=184.1 IS=31.2F PB=.8 MJ=.46
-+ CBD=47.6P CBS=57.2P CGSO=70.2N CGDO=58.5N CGBO=96.3N)
-.MODEL CD4069BP PMOS (LEVEL=1 VTO=-2.9 KP=2M GAMMA=3.97U
-+ PHI=.75 LAMBDA=1.87M RD=28.2 RS=145.2 IS=31.2F PB=.8 MJ=.46
-+ CBD=47.6P CBS=57.2P CGSO=70.2N CGDO=58.5N CGBO=96.3N)
+M1 OUT IN VSS VSS CD4069BN
+M2 OUT IN VDD VDD CD4069BP
 
-M2 OUT IN VSS VSS CD4069BN
-M3 OUT IN VDD VDD CD4069BP
+.param level = 1
+.param gamma = 3.97u
+.param phi   = 0.75
+.param lambda = 1.87m
+.param is = 31.2f
+.param pb = 0.8
+.param mj = 0.46
+.param cbd = 47.6p
+.param cbs = 57.2p
+.param cgso = 70.2n
+.param cgdo = 58.5n
+.param cgbo = 96.3n
+
+.MODEL CD4069BN NMOS (VTO=2.1 KP=2.9M RD=20.2 RS=184.1
++                     LEVEL=level GAMMA=gamma PHI=phi LAMBDA=lambda IS=is
++                     PB=pb MJ=mj CBD=cbd CBS=cbs CGSO=cgso CGDO=cgdo CGBO=cgbo)
+.MODEL CD4069BP PMOS (VTO=-2.9  KP=2M RD=28.2   RS=145.2
++                     LEVEL=level GAMMA=gamma PHI=phi LAMBDA=lambda IS=is
++                     PB=pb MJ=mj CBD=cbd CBS=cbs CGSO=cgso CGDO=cgdo CGBO=cgbo)
 
 .ENDS 4069Gate
