@@ -7,29 +7,19 @@
 *                |  |   Vdd
 *                |  |   |   Vss
 *                |  |   |   |
-.SUBCKT 4069Gate IN OUT VDD VSS
+.subckt 4069Gate IN OUT VDD VSS
 
 M1 OUT IN VSS VSS CD4069BN
 M2 OUT IN VDD VDD CD4069BP
 
-.param level = 1
-.param gamma = 3.97u
-.param phi   = 0.75
-.param lambda = 1.87m
-.param is = 31.2f
-.param pb = 0.8
-.param mj = 0.46
-.param cbd = 47.6p
-.param cbs = 57.2p
-.param cgso = 70.2n
-.param cgdo = 58.5n
-.param cgbo = 96.3n
+.param level=1, gamma=3.97u, phi=0.75, lambda=1.87m, is=31.2f, pb=0.8, mj=0.46
+.param cbd=47.6p, cbs=57.2p, cgso=70.2n, cgdo=58.5n, cgbo=96.3n
 
-.MODEL CD4069BN NMOS (VTO=2.1 KP=2.9M RD=20.2 RS=184.1
+.model CD4069BN NMOS (VTO=2.1 KP=2.9M RD=20.2 RS=184.1
 +                     LEVEL=level GAMMA=gamma PHI=phi LAMBDA=lambda IS=is
 +                     PB=pb MJ=mj CBD=cbd CBS=cbs CGSO=cgso CGDO=cgdo CGBO=cgbo)
-.MODEL CD4069BP PMOS (VTO=-2.9  KP=2M RD=28.2   RS=145.2
+.model CD4069BP PMOS (VTO=-2.9  KP=2M RD=28.2   RS=145.2
 +                     LEVEL=level GAMMA=gamma PHI=phi LAMBDA=lambda IS=is
 +                     PB=pb MJ=mj CBD=cbd CBS=cbs CGSO=cgso CGDO=cgdo CGBO=cgbo)
 
-.ENDS 4069Gate
+.ends 4069Gate
