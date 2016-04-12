@@ -1,7 +1,7 @@
-* -----------------------------------------------------------------------------
+* -------------------------------------------------------------------
 * 4069 Hex Inverter
 * Brian McLaughlin - bjmclaughlin@gmail.com
-* -----------------------------------------------------------------------------
+* -------------------------------------------------------------------
 * Connections: A
 *              |  Not A
 *              |  |  B
@@ -13,42 +13,37 @@
 *              |  |  |  |  |  |  |   Not_D
 *              |  |  |  |  |  |  |   |  D
 *              |  |  |  |  |  |  |   |  |  Not_E
-*              |  |  |  |  |  |  |   |  |  |     E
+*              |  |  |  |  |  |  |   |  |  |   E
 *              |  |  |  |  |  |  |   |  |  |  |  Not_F
 *              |  |  |  |  |  |  |   |  |  |  |  |  F
 *              |  |  |  |  |  |  |   |  |  |  |  |  |  Vdd
 *              |  |  |  |  |  |  |   |  |  |  |  |  |  |
-.SUBCKT 4069IC 1  2  3  4  5  6  7   8  9  10 11 12 13 14
+.SUBCKT 4069IC A  NA B  NB C  NC Vss ND D  NE E  NF F  Vdd
 
-* Gate A
-MA1 1  2  7  14  CD4069BN
-MA2 1  2  14 14 CD4069BP
+XA A NA Vdd Vss 4069Gate
+XB B NB Vdd Vss 4069Gate
+XC C NC Vdd Vss 4069Gate
+XD D ND Vdd Vss 4069Gate
+XE E NE Vdd Vss 4069Gate
+XF F NF Vdd Vss 4069Gate
 
-* Gate B
-MB1 3  4  7  14  CD4069BN
-MB2 3  4  14 14 CD4069BP
+.ENDS 4069IC
 
-* Gate C
-MC1 5  6  7  14  CD4069BN
-MC2 5  6  14 14 CD4069BP
+* -------------------------------------------------------------------
+* 4069 Hex Gate
+* -------------------------------------------------------------------
+.SUBCKT 4069Gate IN OUT Vdd Vss
 
-* Gate D
-MD1 9  8  7  14  CD4069BN
-MD2 9  8  14 14 CD4069BP
-
-* Gate E
-ME1 11 10 7  14  CD4069BN
-ME2 11 10 14 14 CD4069BP
-
-* Gate F
-MF1 13 12 7  14  CD4069BN
-MF2 13 12 14 14 CD4069BP
+M1 IN OUT Vdd Vdd CD4069BP
+M2 IN OUT Vss Vss CD4069BN
 
 .MODEL CD4069BN NMOS (LEVEL=1 VTO=2.1 KP=2.9M GAMMA=3.97U
 + PHI=.75 LAMBDA=1.87M RD=20.2 RS=184.1 IS=31.2F PB=.8 MJ=.46
 + CBD=47.6P CBS=57.2P CGSO=70.2N CGDO=58.5N CGBO=96.3N)
+
 .MODEL CD4069BP PMOS (LEVEL=1 VTO=-2.9 KP=2M GAMMA=3.97U
 + PHI=.75 LAMBDA=1.87M RD=28.2 RS=145.2 IS=31.2F PB=.8 MJ=.46
 + CBD=47.6P CBS=57.2P CGSO=70.2N CGDO=58.5N CGBO=96.3N)
 
-.ENDS 4069IC
+.ENDS
+* -------------------------------------------------------------------

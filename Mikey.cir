@@ -1,0 +1,11 @@
+
+.SUBCKT Mikey Vcc GND POWERON
+
+Rp_up Vcc  S1_1 10k
+S1 S1_1 POWERON POWERON GND PowerSwitch ON
+S2 POWERON S2_1 POWERON GND PowerSwitch OFF
+Rp_dn S2_1 GND  10k
+
+.model PowerSwitch sw vh=0V vt=1V ron=1 roff=1G
+
+.ENDS Mikey
